@@ -11,10 +11,6 @@ const facebookStrategy = require('passport-facebook').Strategy
 
 // Google OAuth Routes
 
-// Zoom OAuth Routes
-const ZoomRoute = require("./routes/zoom.routes/Zoom.oauth.route");
-app.use("/zoomOAuth", ZoomRoute);
-
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -33,13 +29,11 @@ app.use("/zoomOAuth", ZoomRoute);
 
 // GitHub OAuth Routes
 
-app.listen('5000', () => {
-    console.log("🚀 Server started on port 5000");
-});
+
 
 passport.use(new facebookStrategy({
-    clientID: "",
-    clientSecret: "",
+    clientID: "awdadwawd",
+    clientSecret: "dweawaddw",
     callbackURL: "http://localhost:5000/auth/facebook/secrets"
 },
     function (token, refreshToken, profile, done) {
@@ -67,12 +61,11 @@ app.get('/failed', (req, res) => {
 passport.serializeUser(function (user, done) {
     done(null, user)
 })
+
 passport.deserializeUser(function (id, done) {
     return done(null, id)
 })
-app.listen(5000,(err)=>{
-    if (err){
-        console.error(err)
-    }
-    console.log(`Connected to port ${5000}`)
+
+app.listen('5000', () => {
+    console.log("🚀 Server started on port 5000");
 });
