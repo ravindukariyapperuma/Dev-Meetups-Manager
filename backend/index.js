@@ -1,11 +1,13 @@
 require('dotenv/config')
 
 const express = require('express');
+const { LocalStorage } = require("node-localstorage");
 const app = express();
 const cors = require("cors");
-
+require('dotenv').config()
 const passport = require('passport');
-const session = require('express-session')
+const session = require('express-session');
+const fbAuth = require('./routes/fbAuth')
 app.use(express.json());
 
 const facebookStrategy = require('passport-facebook').Strategy
@@ -31,34 +33,21 @@ app.use("/zoomOAuth", ZoomOAuthRoute);
 
 // GitHub OAuth Routes
 
-
-
 passport.use(new facebookStrategy({
-    clientID: "awdadwawd",
-    clientSecret: "dweawaddw",
-    callbackURL: "http://localhost:5000/auth/facebook/secrets"
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: process.env.callbackURL,
+    profileFields: ['id', 'displayName']
 },
     function (token, refreshToken, profile, done) {
-        console.log("HELLLO")
         console.log("TOKEN", token)
-        console.log("TOKEN refreshToken", refreshToken)
-        console.log("TOKEN refreshToken", done)
-        console.log("TOKEN refreshToken", profile)
+        if (typeof localStorage === "undefined" || localStorage === null) {
+            var LocalStorage = require('node-localstorage').LocalStorage;
+            localStorage = new LocalStorage('./scratch');
+        }
+        localStorage.setItem('fbToken', token);
+        return done(null, profile)
     }))
-
-app.get('/auth/facebook', passport.authenticate('facebook'))
-
-app.get('/auth/facebook/secrets', passport.authenticate('facebook', {successRedirect:'/profile', failaureRedirect:'/failed'}))
-
-app.get('/profile', (req, res) => {
-    console.log("EFOIJEFOIJE")
-    res.send("YOU ARE A VALID USER")
-})
-
-app.get('/failed', (req, res) => {
-    console.log("ssssssssssssss")
-    res.send("YOU ARE A NOT VALID USER")
-})
 
 passport.serializeUser(function (user, done) {
     done(null, user)
@@ -68,6 +57,9 @@ passport.deserializeUser(function (id, done) {
     return done(null, id)
 })
 
-app.listen('5000', () => {
+
+app.use('/', fbAuth);
+
+app.listen(process.env.PORT, () => {
     console.log("🚀 Server started on port 5000");
 });
