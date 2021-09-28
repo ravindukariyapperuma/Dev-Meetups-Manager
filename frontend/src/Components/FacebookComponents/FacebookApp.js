@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function FacebookApp() {
-    return (
-        <div></div>
-    )
+  return <div></div>;
 }
 
-export default FacebookApp
+export default FacebookApp;
