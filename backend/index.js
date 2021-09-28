@@ -1,3 +1,5 @@
+require('dotenv/config')
+
 const express = require('express');
 const { LocalStorage } = require("node-localstorage");
 const app = express();
@@ -24,8 +26,8 @@ app.use(passport.session());
 // Google OAuth Routes
 
 // Zoom OAuth Routes
-const ZoomRoute = require("./routes/zoom.routes/Zoom.oauth.route");
-app.use("/zoomOAuth", ZoomRoute);
+const ZoomOAuthRoute = require("./routes/zoom.routes/Zoom.oauth.route");
+app.use("/zoomOAuth", ZoomOAuthRoute);
 
 // Facebook OAuth Routes
 
