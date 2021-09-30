@@ -90,7 +90,7 @@ function Home() {
             <Grid className={classes.gridRight} item xs={6}>
               <Grid container spacing={0}>
                 <Grid item className={classes.containerRight} xs={12}>
-                  <a className={classes.link} href="/">
+                <a className={classes.link} href="http://localhost:5000/googleOAuth/getAuthURL">
                     <img
                       src={googleImg}
                       className={classes.buttons}
@@ -111,7 +111,7 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                  <a className={classes.link} href="/">
+                <a className={classes.link} href="http://localhost:5000/auth/facebook">
                     <img
                       src={facebookImg}
                       className={classes.buttons}
