@@ -22,8 +22,11 @@ app.use(require('cookie-parser')());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 // Google OAuth Routes
+const googleOAuthRoute = require("./routes/googleAuth/googleAuthRoute");
+app.use("/googleOAuth",googleOAuthRoute);
 
 // Zoom OAuth Routes
 const ZoomOAuthRoute = require("./routes/zoom.routes/Zoom.oauth.route");
