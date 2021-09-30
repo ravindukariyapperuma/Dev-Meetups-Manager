@@ -117,7 +117,7 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="http://localhost:5000/auth/facebook">
+                <a className={classes.link} href="http://localhost:5000/fbOauth">
                     <img
                       src={facebookImg}
                       className={classes.buttons}

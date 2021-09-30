@@ -22,43 +22,14 @@ app.use(require('cookie-parser')());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(cors())
 // Google OAuth Routes
 
 // Zoom OAuth Routes
 const ZoomOAuthRoute = require("./routes/zoom.routes/Zoom.oauth.route");
 app.use("/zoomOAuth", ZoomOAuthRoute);
 
-// Facebook OAuth Routes
-
-// GitHub OAuth Routes
-
-passport.use(new facebookStrategy({
-    clientID: process.env.clientID,
-    clientSecret: process.env.clientSecret,
-    callbackURL: process.env.callbackURL,
-    profileFields: ['id', 'displayName']
-},
-    function (token, refreshToken, profile, done) {
-        console.log("TOKEN", token)
-        if (typeof localStorage === "undefined" || localStorage === null) {
-            var LocalStorage = require('node-localstorage').LocalStorage;
-            localStorage = new LocalStorage('./scratch');
-        }
-        localStorage.setItem('fbToken', token);
-        return done(null, profile)
-    }))
-
-passport.serializeUser(function (user, done) {
-    done(null, user)
-})
-
-passport.deserializeUser(function (id, done) {
-    return done(null, id)
-})
-
-
-app.use('/', fbAuth);
+app.use('/fbOauth', fbAuth);
 
 app.listen(process.env.PORT, () => {
     console.log("🚀 Server started on port 5000");
