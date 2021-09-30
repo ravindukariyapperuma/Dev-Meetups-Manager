@@ -99,7 +99,7 @@ function Home() {
               <Grid container spacing={0}>
               
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="/">
+                <a className={classes.link} href="http://localhost:5000/googleOAuth/getAuthURL">
                     <img
                       src={googleImg}
                       className={classes.buttons}
