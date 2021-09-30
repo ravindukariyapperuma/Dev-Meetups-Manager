@@ -17,6 +17,7 @@ var LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
+const plus = google.plus('v1');
 
 const client_id = credentials.web.client_id;
 const client_secret = credentials.web.client_secret;
@@ -30,7 +31,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
-const SCOPE = ["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/drive.file" ,"https://www.googleapis.com/auth/calendar","https://www.googleapis.com/auth/calendar.events","https://www.googleapis.com/auth/drive"];
+const SCOPE = ["https://www.googleapis.com/auth/userinfo.email","https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/drive.file" ,"https://www.googleapis.com/auth/calendar","https://www.googleapis.com/auth/calendar.events","https://www.googleapis.com/auth/drive"];
 
 
 
@@ -57,7 +58,8 @@ exports.OauthService = (req,res)=>{
             
           oAuth2Client.setCredentials(tokens)       
           const encryptedtoken = cryptr.encrypt(JSON.stringify(tokens));  
-          localStorage.setItem('token',encryptedtoken);
+          localStorage.setItem('googletoken',encryptedtoken);
+
           res.redirect(`http://localhost:3000/GoogleApp`)
         }
         else{
@@ -65,6 +67,10 @@ exports.OauthService = (req,res)=>{
             <h3>Login failed!!</h3>
         `);
         }
+        
+
+
+
     });
 
 };
@@ -73,7 +79,7 @@ exports.OauthService = (req,res)=>{
 exports.googleCreateEventService = (req,res)=>{
 
   
-    oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('token'))));
+    oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('googletoken'))));
    
       
     const  summary = req.body.summary;
