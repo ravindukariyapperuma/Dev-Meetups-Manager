@@ -1,8 +1,11 @@
 import React from 'react'
+import ZoomAppDrawer from "./ZoomAppDrawer"
 
 function ZoomApp() {
     return (
-        <div></div>
+        <div>
+            <ZoomAppDrawer />
+        </div>
     )
 }
 

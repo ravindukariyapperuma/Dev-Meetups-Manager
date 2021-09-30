@@ -7,6 +7,7 @@ const cors = require("cors");
 const passport = require('passport');
 const session = require('express-session')
 app.use(express.json());
+app.use(cors());
 
 const facebookStrategy = require('passport-facebook').Strategy
 

@@ -8,14 +8,14 @@ import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@mui/material/Button";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
 import banner from "../../Asserts/logo.gif";
 import googleImg from "../../Asserts/G1.png";
 import zoomImg from "../../Asserts/Z1.png";
 import facebookImg from "../../Asserts/F1.png";
 import githubImg from "../../Asserts/GH1.png";
-const axios = require('axios');
+const axios = require("axios");
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#614c87",
-
   },
   container: {
     width: "100%",
@@ -80,13 +79,6 @@ const useStyles = makeStyles((theme) => ({
 function Home() {
   const classes = useStyles();
 
-//   const handleChangeZoomLoginButton = () => {
-//     axios({
-//         method: 'get',
-//         url: 'http://localhost:5000/ZoomApp/',
-//       });
-//     }
-
   return (
     <Container component="main" className={classes.container}>
       <div className={classes.paper}>
@@ -97,9 +89,8 @@ function Home() {
             </Grid>
             <Grid className={classes.gridRight} item xs={6}>
               <Grid container spacing={0}>
-              
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="/">
+                  <a className={classes.link} href="/">
                     <img
                       src={googleImg}
                       className={classes.buttons}
@@ -108,7 +99,10 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="http://localhost:5000/zoomOAuth/">
+                  <a
+                    className={classes.link}
+                    href="http://localhost:5000/zoomOAuth/"
+                  >
                     <img
                       src={zoomImg}
                       className={classes.buttons}
@@ -117,7 +111,7 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="/">
+                  <a className={classes.link} href="/">
                     <img
                       src={facebookImg}
                       className={classes.buttons}
@@ -126,7 +120,7 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                <a className={classes.link} href="/">
+                  <a className={classes.link} href="/">
                     <img
                       src={githubImg}
                       className={classes.buttons}
