@@ -12,4 +12,10 @@ router.get("/refresh", ZoomService.RefreshAccessToken);
 
 router.get("/userdata", ZoomService.GetUserData);
 
+router.post("/createmeeting", ZoomService.CreateMeeting);
+
+router.get("/getmeetings", ZoomService.GetAllMeetings);
+
+// router.delete("/deletemeeting", ZoomService.DeleteMeeting);
+
 module.exports = router;

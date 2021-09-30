@@ -81,4 +81,75 @@ module.exports = {
       res.send(error);
     }
   },
+
+  CreateMeeting: async (req, res, next) => {
+    try {
+      console.log("🎥 Meeting Create Request Body: ", req.body);
+      const encryptedZoomAccessToken = localStorage.getItem("zoomAccessToken");
+      const access_token = cryptr.decrypt(encryptedZoomAccessToken);
+      const options = {
+        method: "POST",
+        url: "https://api.zoom.us/v2/users/me/meetings",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${access_token}`,
+        },
+        body: {
+          topic: req.body.topic,
+          type: 2,
+          start_time: req.body.datetime,
+          password: req.body.password,
+          agenda: req.body.description,
+          settings: {
+            host_video: false,
+            participant_video: false,
+            join_before_host: false,
+            mute_upon_entry: true,
+            use_pmi: false,
+            approval_type: 0,
+          },
+        },
+        json: true,
+      };
+      request(options, function (error, response, body) {
+        if (error) {
+          console.log('🐞 API Response Error: ', error)
+      }else{
+        console.log("🔭 Meeting create rsponse body: ", body);
+        res.send(body);
+      }
+      });
+    } catch (error) {
+      res.send(error);
+    }
+  },
+
+  GetAllMeetings: async (req, res, next) => {
+    try {
+      const encryptedZoomAccessToken = localStorage.getItem("zoomAccessToken");
+      const access_token = cryptr.decrypt(encryptedZoomAccessToken);
+      request.get('https://api.zoom.us/v2/users/me/meetings', (error, response, body) => {
+                    if (error) {
+                        console.log('🐞 API Response Error: ', error)
+                    } else {
+                        body = JSON.parse(body);
+                        // Display response in console
+                        console.log('API call ', body);
+                        res.json(body)
+                        
+                    }
+                }).auth(null, null, true, access_token);
+    } catch (error) {
+      res.send(error);
+    }
+  }
+
+  // DeleteMeeting: async (req, res, next) => {
+  //   try {
+      
+  //   } catch (error) {
+  //     res.send(error);
+  //   }
+  // },
+
 };
