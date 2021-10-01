@@ -1,1 +1,5 @@
 node_modules
+scratch
+.env
+services/Googleservices/googlecredentials.json
+uploads
