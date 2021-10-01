@@ -1,10 +1,9 @@
-
 import React, { Component } from 'react'
 import axios from 'axios'
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import moment from 'moment'
-
+import Googledrawer from "./GoogleDrawer"
 
 export default class Googleevent extends Component {
 
@@ -154,8 +153,13 @@ export default class Googleevent extends Component {
   render() {
      
     return (
-      <div className="jumbotron"  style={{ width: "50%",marginLeft:"25%",height:"50%",marginTop:"1%"}}>
-   <form onSubmit={this.onSubmit}>
+      <div>
+      <div>
+         < Googledrawer />
+      </div>
+      <div className="jumbotron"  style={{ width: "60%",marginLeft:"25%",height:"50%",marginTop:"1%"}}>
+       
+    <form onSubmit={this.onSubmit}>
    <div class="card">
   <div class="card-body">
     <h5 class="card-title"  style={{marginLeft:"40%"}}>Google Add Event</h5><br/>
@@ -165,7 +169,7 @@ export default class Googleevent extends Component {
     </div><br/>
     <div class="form-outline">
        <label class="form-label" for="form1">Location</label>
-       <input type="text" placeholderr ="Enter event location"  value={this.state.location } onChange={this.OnChangelocation}  id="form1" class="form-control" />
+       <input type="text" placeholder ="Enter event location"  value={this.state.location } onChange={this.OnChangelocation}  id="form1" class="form-control" />
     </div><br/><br/>
     <div class="form-outline">
        <label class="form-label" for="form1">description</label>
@@ -214,24 +218,25 @@ export default class Googleevent extends Component {
        <label class="form-label" for="form1">Email</label>
        <input type="text"  placeholder="Enter receiver email" value={this.state.email} onChange={this.OnChangeemail}   id="form1" class="form-control" />   
     </div><br/>
-    
-   
-     
-      
-
     <button type="submit" value="Submit" style={{ width: "20%",marginLeft:"35%"}} class="btn btn-primary">Add Event</button>
   </div>
 </div>
 </form>
 <form onSubmit={this.onFileSubmit}>
-<h5 class="card-title"  style={{marginLeft:"35%",marginTop:"1%"}}>Google Drive File Upload</h5><br/>
+  <div class="card" style={{marginTop:"2%"}}>
+   <div class="card-body">
+    <h5 class="card-title"  style={{marginLeft:"34%"}}>Google Drive File Upload</h5><br/>
     <div class="form-outline">
        <label class="form-label" for="form1">File Upload</label>
        <input type="file" className="form-control" id="exampleFormControlFile1"  onChange={(e)=>this.OnChangeFile(e)} />
     </div><br/>
     <button type="submit" value="Submit" style={{ width: "20%",marginLeft:"35%"}} class="btn btn-primary">Upload</button><br/>
     <br/>
-    </form>
+    </div>
+  </div>
+</form>
+    
+</div>
 </div>
     );
   }
