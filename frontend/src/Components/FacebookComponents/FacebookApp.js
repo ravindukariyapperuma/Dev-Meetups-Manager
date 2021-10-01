@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import {FormControl, InputLabel} from "@mui/material";
+import swal from 'sweetalert';
+import Product  from './Product.js';
+import Row from 'react-bootstrap/Row';
+
 function FacebookApp() {
 
   const [page, setPage] = useState();
   const [user, setUser] = useState();
   const [optionsState, setoptionsState] = useState(page && [{name:page[0].name}])
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [posts, setPosts] = useState([]);
+
   const [inputField , setInputField] = useState({
     message: '',
     id:''
@@ -13,11 +19,10 @@ function FacebookApp() {
 
   const inputsHandler = (e) =>{
     setInputField( {[e.target.name]: e.target.value, id:page[0].id} )
-    console.log("EFOEFEF", e)
   }
+
   useEffect(() => {
     user === undefined && axios.get("http://localhost:5000/fbOAuth/userInfo").then(results => {
-          console.log("RESDSS", results)
           results.data && setUser(results.data)
         })
 
@@ -30,14 +35,32 @@ function FacebookApp() {
     page && setoptionsState([{name:page[0].name}])
   }, [])
 
+  useEffect(() => {
+    axios.get("http://localhost:5000/fbOauth/getPagePosts").then(results => {
+     setPosts(old => [...results.data])
+      console.log("EFOEKF", posts)
+    })
+  }, [posts])
+
+  const getPostData = () => {
+    axios.get("http://localhost:5000/fbOauth/getPagePosts").then(results => {
+      setPosts(old => [...results.data])
+      console.log("EFOEKF", posts)
+    })
+  }
 
   function onSubmit() {
     setInputField({...inputField, id:page[0].id})
-    console.log("FKEFPEFK", inputField)
-
     axios.post("http://localhost:5000/fbOAuth/publishPost", inputField).then(results => {
-      console.log("RES", results)
+      results &&
+      swal({
+        title:`Posted!`,
+        text:`Successfully posted on ${page[0].name}!`,
+        icon:"success",
+        button:"Ok!"
+      });
     })
+    getPostData()
   }
 
   function handleSelectChange(event) {
@@ -58,7 +81,6 @@ function FacebookApp() {
                onChange={inputsHandler}
                value={inputField.message}
         /> <br/>
-
         <div className="dropdown" style={{width: "40%", marginLeft: "0%"}}>
           <select className="form-control" value={optionsState} onChange={handleSelectChange}>
             {page && true && page.map(option =>  <option key={option.name} value={option.name}>{option.name}</option>)}
@@ -70,6 +92,18 @@ function FacebookApp() {
         </button>
       </div>
       <br/>
+    </div>
+    {console.log("POSTSSS", posts)}
+    {/*<div className='row-wrapper'>*/}
+      <Row>
+        {posts && posts.map(product => (
+            <Product key={product.id} product={product} name={page[0].name}/>
+        ))}
+      </Row>
+    {/*</div>*/}
+
+    <div className="card-body">
+
     </div>
   </div>;
 }

@@ -9,6 +9,8 @@ module.exports = {
             process.env.clientID +
             "&redirect_uri=" +
             process.env.callbackURL +
+            "&scope=" +
+            process.env.FB_AUTH_SCOPE +
             "&state=" +
             process.env.state
         );
@@ -84,6 +86,43 @@ module.exports = {
             result.status === 200 ? res.send(result.status) : res.send(404)
         }catch (e) {
             res.send(e)
+        }
+    },
+
+    deleteFBSession: async (req, res) => {
+        try{
+            const accessToken = localStorage.getItem("fbToken")
+            const info =
+                "https://graph.facebook.com/me?access_token=" +
+                accessToken
+            const result = await axios.get(info);
+            const { id } = result.data;
+            const url = "https://graph.facebook.com/" +
+                id +
+                "/permissions?access_token=" +
+                accessToken
+            const deleteResult = await axios.delete(url);
+            res.send(deleteResult.status)
+        }catch (e) {
+
+        }
+    },
+
+    getPagePosts: async ( req, res) => {
+        try{
+            const accessToken = localStorage.getItem("fbToken");
+            const pageInfo = JSON.parse(localStorage.getItem("PageInfo"))
+
+            const url = "https://graph.facebook.com/v12.0/" +
+                pageInfo[0].id +
+                "/feed?" +
+                "access_token=" +
+                accessToken
+            const result = await axios.get(url)
+            console.log("RES", result)
+            res.send(result.data.data)
+        }catch (e) {
+
         }
     }
 }
