@@ -12,4 +12,8 @@ router.get("/getPageInfo", FacebookService.getPageInfo);
 
 router.post("/publishPost", FacebookService.publishPost)
 
+router.delete("/deleteFBSession", FacebookService.deleteFBSession);
+
+router.get("/getPagePosts", FacebookService.getPagePosts);
+
 module.exports = router;
