@@ -1,5 +1,4 @@
 require('dotenv/config')
-
 const express = require('express');
 const { LocalStorage } = require("node-localstorage");
 const app = express();
@@ -16,6 +15,7 @@ const facebookStrategy = require('passport-facebook').Strategy
 // Google OAuth Routes
 
 const bodyParser = require('body-parser');
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(require('cookie-parser')());
@@ -32,6 +32,12 @@ app.use("/zoomOAuth", ZoomOAuthRoute);
 // Facebook OAuth Routes
 
 // GitHub OAuth Routes
+const gitHubRoute = require("./routes/githubOauth");
+app.use("/github", gitHubRoute);
+
+
+
+
 
 passport.use(new facebookStrategy({
     clientID: process.env.clientID,
