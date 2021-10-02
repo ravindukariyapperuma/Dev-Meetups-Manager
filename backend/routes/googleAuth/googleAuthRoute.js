@@ -11,6 +11,8 @@ router.get("/oauth", googleAuthService.OauthService);
 
 router.post("/create-event", googleAuthService.googleCreateEventService);
 
+router.get('/user-info', googleAuthService.googleUserInfo);
+
 router.post("/upload-files",upload.single('file'),googleAuthService.googleDriveUpload);
 
 module.exports = router;

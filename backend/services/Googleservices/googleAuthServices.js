@@ -36,6 +36,7 @@ const SCOPE = ["https://www.googleapis.com/auth/userinfo.email","https://www.goo
 
 
 
+//consent screen service
 
 exports.getAuthUrlService = (req,res)=>{
     const authUrl = oAuth2Client.generateAuthUrl({
@@ -48,17 +49,28 @@ exports.getAuthUrlService = (req,res)=>{
   
  };
 
+ 
+ // redirect uri service
+
 exports.OauthService = (req,res)=>{
  
     var session = req.session;
     var code =  req.query.code;
-    console.log('code=='+code);
+    console.log('Authorization code =='+code);
     oAuth2Client.getToken(code,function(err,tokens){
         if(!err){
             
           oAuth2Client.setCredentials(tokens)       
+          console.log('Access token ='+tokens.access_token)
+          console.log('Expiry date ='+tokens.expiry_date)
+          console.log('Scope ='+tokens.scope)
+          console.log('Refresh token ='+tokens.refresh_token)
+          console.log('Tokentype='+tokens.token_type)
+
           const encryptedtoken = cryptr.encrypt(JSON.stringify(tokens));  
           localStorage.setItem('googletoken',encryptedtoken);
+
+
 
           res.redirect(`http://localhost:3000/GoogleApp`)
         }
@@ -75,6 +87,31 @@ exports.OauthService = (req,res)=>{
 
 };
 
+// google user-info service
+
+exports.googleUserInfo = (req,res)=>{
+
+  oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('googletoken'))));
+  
+  var oauth2 = google.oauth2({
+    auth: oAuth2Client,
+    version: 'v2'
+  });
+  oauth2.userinfo.get(
+    function(err, res1) {
+      if (err) {
+         console.log(err);
+      } else {
+         console.log(res1);
+         res.send(res1.data);
+      }
+  });
+
+
+
+}
+
+// google add event service
 
 exports.googleCreateEventService = (req,res)=>{
 
@@ -128,6 +165,9 @@ exports.googleCreateEventService = (req,res)=>{
     );
   };
 
+
+ // google drive file upload service
+ 
   exports.googleDriveUpload = (req,res)=>{
 
     oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('token'))));
