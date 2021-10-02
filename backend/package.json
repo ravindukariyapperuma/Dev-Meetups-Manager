@@ -28,7 +28,6 @@
     "localStorage": "^1.0.4",
     "moment": "^2.29.1",
     "multer": "^1.4.3",
-    "request": "^2.88.2",
     "routes": "^2.1.0"
   },
   "devDependencies": {

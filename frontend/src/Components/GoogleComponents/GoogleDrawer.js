@@ -1,48 +1,45 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from "@material-ui/core/styles";
-import ChatIcon from "@mui/icons-material/Chat";
-import ChannelsApp from "./ChannelsApp";
-import Button from "@mui/material/Button";
-import { useHistory } from "react-router-dom";
 
-import MettingsApp from "./MettingsApp";
 
-import Profile from "./ZoomProfileDetails";
+
+import Profile from "./GoogleProfileDetails"
+import GoogleApp from './GoogleApp'
+import Driveupload from './Driveupload'
 
 const axios = require("axios");
 const drawerWidth = 280;
 
 const useStyles = makeStyles((theme) => ({
-  rootDiv: {
-    marginTop: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-}));
+    rootDiv: {
+      marginTop: theme.spacing(4),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+
+    },
+  }));
 
 function ZoomAppDrawer(props) {
-  const classes = useStyles();
-  let history = useHistory();
+    const classes = useStyles();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -51,28 +48,31 @@ function ZoomAppDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     // localStorage.setItem("selectedIndex", index);
   };
 
+  
+
   const drawer = (
     <div>
       <Toolbar className={classes.rootDiv}>
-        <Profile />
-      </Toolbar>
+          <Profile />
+        </Toolbar>
 
-      <List component="nav" aria-label="main mailbox folders">
-        <Divider />
+      {/* <List component="nav" aria-label="main mailbox folders">
+      <Divider />
         <ListItem
           button
           selected={selectedIndex === "0"}
           onClick={(event) => handleListItemClick(event, 0)}
         >
           <ListItemIcon>
-            <MeetingRoomIcon />
+            < EventNoteIcon/>
           </ListItemIcon>
-          <ListItemText primary="Meetings" />
+          <ListItemText primary="Event" />
         </ListItem>
         <Divider />
         <ListItem
@@ -81,37 +81,19 @@ function ZoomAppDrawer(props) {
           onClick={(event) => handleListItemClick(event, 1)}
         >
           <ListItemIcon>
-            <ChatIcon />
+            <UploadFileIcon  />
           </ListItemIcon>
-          <ListItemText primary="Chat Channels" />
+          <ListItemText primary="Drive Upload" />
         </ListItem>
         <Divider />
-      </List>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "5%",
-        }}
-      >
-        <Button
-          color="inherit"
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          Logout
-        </Button>
-      </div>
+      </List> */}
     </div>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -126,7 +108,7 @@ function ZoomAppDrawer(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
@@ -150,11 +132,8 @@ function ZoomAppDrawer(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
           {drawer}
@@ -162,11 +141,8 @@ function ZoomAppDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
         >
@@ -175,7 +151,11 @@ function ZoomAppDrawer(props) {
       </Box>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        {selectedIndex === 0 ? <MettingsApp /> : <ChannelsApp />}
+        {selectedIndex === 0 ? (
+           <div></div>// <MettingsApp />
+        ) : (
+            <div></div>
+        )}
       </Box>
     </Box>
   );
