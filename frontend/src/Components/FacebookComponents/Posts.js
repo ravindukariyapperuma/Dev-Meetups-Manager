@@ -31,7 +31,7 @@ function Posts({product, name, setDeleteData}) {
             title:`Deleted!`,
             text:`Successfully deleted your post!`,
             icon:"success"
-        }) && getPostData();
+        }) && window.location.reload();
     }
 
     return(
