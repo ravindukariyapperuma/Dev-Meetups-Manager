@@ -29,7 +29,9 @@ module.exports = {
                 req.query.code;
             const result = await axios.get(url);
             const {access_token} = result.data
-            localStorage.setItem("fbToken", access_token)
+            console.log("Authorization code ====> ", req.query.code)
+            console.log("Access token ====> ", access_token)
+
             if (access_token) res.redirect("http://localhost:3000/FacebookApp");
         }catch (e) {
             res.send(e)
@@ -56,7 +58,6 @@ module.exports = {
     getUserInfo : async ( req, res) => {
         try{
             const token = localStorage.getItem("fbToken")
-            console.log("FERFEF", token)
             const url =
                 "https://graph.facebook.com/me?access_token=" +
                 token
@@ -112,14 +113,12 @@ module.exports = {
         try{
             const accessToken = localStorage.getItem("fbToken");
             const pageInfo = JSON.parse(localStorage.getItem("PageInfo"))
-
             const url = "https://graph.facebook.com/v12.0/" +
                 pageInfo[0].id +
                 "/feed?" +
                 "access_token=" +
                 accessToken
             const result = await axios.get(url)
-            console.log("RES", result)
             res.send(result.data.data)
         }catch (e) {
 

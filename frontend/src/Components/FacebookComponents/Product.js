@@ -17,23 +17,23 @@ const bull = (
 );
 function Product({product, name}) {
     return(
-        <Col xs={12} md={6} lg={2} key={product.id}>
-            <Card style={{ width: '20rem' }}>
+        <Col xs={2} md={2} lg={2} key={product.id}>
+            <Card style={{ width: '30rem', height:'20rem'}}>
                 <CardHeader></CardHeader>
                 <CardContent>
                     <CardHeader>{product.message}sefsefsefsef</CardHeader>
                 </CardContent>
                 <CardMedia
                     component="img"
-                    height="194"
                     image= {image}
+                    height={30}
                     alt="Paella dish"
                 />
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <Typography sx={{ fontSize: 5 }} color="text.secondary" gutterBottom>
                        Page Name : {name}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography fontSize={40}>
                         Page Message : {product.message}
                     </Typography>
                 </CardContent>

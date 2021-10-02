@@ -3,6 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import Product  from './Product.js';
 import Row from 'react-bootstrap/Row';
+import fblogo from './images/fblogo.png';
 
 function FacebookApp() {
 
@@ -38,9 +39,8 @@ function FacebookApp() {
   useEffect(() => {
     axios.get("http://localhost:5000/fbOauth/getPagePosts").then(results => {
      setPosts(old => [...results.data])
-      console.log("EFOEKF", posts)
     })
-  }, [posts])
+  }, [])
 
   const getPostData = () => {
     axios.get("http://localhost:5000/fbOauth/getPagePosts").then(results => {
@@ -68,8 +68,10 @@ function FacebookApp() {
   }
 
   return <div>
+    <div className="jumbotron"  style={{ width: "50%",marginLeft:"25%",marginTop:"1%"}}>
     <div className="card-body">
-      <h5 className="card-title" style={{marginLeft: "40%"}}>Welcome { user && user.name}</h5><br/>
+      <img src={fblogo} height={80} width={100} style={{marginLeft: "1%", marginBottom:"0%"}}/>
+      <h5 className="card-title" style={{marginLeft: "40%", marginBottom:"0%", fontSize:25}}>Welcome { user && user.name}!</h5><br/>
       <h5 className="card-title" style={{marginLeft: "1%"}}>Create your facebook announcement</h5><br/>
       <div className="form-outline">
 
@@ -93,17 +95,13 @@ function FacebookApp() {
       </div>
       <br/>
     </div>
-    {console.log("POSTSSS", posts)}
-    {/*<div className='row-wrapper'>*/}
+      {/*<div className='row-wrapper'>*/}
       <Row>
         {posts && posts.map(product => (
-            <Product key={product.id} product={product} name={page[0].name}/>
+            <Product key={product.id} product={product} name={page && page[0].name}/>
         ))}
       </Row>
     {/*</div>*/}
-
-    <div className="card-body">
-
     </div>
   </div>;
 }
