@@ -16,4 +16,6 @@ router.delete("/deleteFBSession", FacebookService.deleteFBSession);
 
 router.get("/getPagePosts", FacebookService.getPagePosts);
 
+router.delete("/deletePosts", FacebookService.deletePagePost);
+
 module.exports = router;
