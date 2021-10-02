@@ -57,7 +57,7 @@ function MettingsApp() {
         datetime: datetime,
       };
 
-      await axios.post(" http://localhost:5000/zoomOAuth/createmeeting", data).then((res) => {
+      await axios.post("http://localhost:5000/zoomOAuth/createmeeting", data).then((res) => {
       console.log("res", res);
       setTopic("");
     setDescription("");
