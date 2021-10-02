@@ -1,52 +1,21 @@
-const passport = require('passport');
 const express = require('express');
 var router = express.Router();
+const FacebookService = require("../../services/facebook.services/facebook.services");
 
-router.get('/', function (req, res) {
-    res.render('pages/index.ejs'); // load the index.ejs file
-});
+router.get("/", FacebookService.getFBAuthCode);
 
-router.get('/profile', isLoggedIn, function (req, res) {
-    console.log("asrfadawd",req.user) // get the user out of session and pass to template
+router.get("/redirect", FacebookService.RequestAccessToken);
 
-});
+router.get("/userInfo", FacebookService.getUserInfo);
 
-router.get('/error', isLoggedIn, function (req, res) {
-    console.log("Error");
-});
+router.get("/getPageInfo", FacebookService.getPageInfo);
 
-router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email']
-}));
+router.post("/publishPost", FacebookService.publishPost)
 
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/profile',
-        failureRedirect: '/failed'
-    }));
+router.delete("/deleteFBSession", FacebookService.deleteFBSession);
 
-router.get('/profile', (req, res) => {
-    console.log("EFOIJEFOIJE")
-    res.send("YOU ARE A VALID USER")
-})
+router.get("/getPagePosts", FacebookService.getPagePosts);
 
-router.get('/failed', (req, res) => {
-    console.log("ssssssssssssss")
-    res.send("YOU ARE A NOT VALID USER")
-})
-
-router.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-});
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()){
-        console.log("HEREE")
-        return next();
-    }
-
-    res.redirect('/');
-}
+router.delete("/deletePosts", FacebookService.deletePagePost);
 
 module.exports = router;
