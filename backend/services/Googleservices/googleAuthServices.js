@@ -56,6 +56,7 @@ exports.OauthService = (req,res)=>{
  
     var session = req.session;
     var code =  req.query.code;
+    console.log(req)
     console.log('Authorization code =='+code);
     oAuth2Client.getToken(code,function(err,tokens){
         if(!err){
@@ -170,7 +171,7 @@ exports.googleCreateEventService = (req,res)=>{
  
   exports.googleDriveUpload = (req,res)=>{
 
-    oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('token'))));
+    oAuth2Client.setCredentials(JSON.parse(cryptr.decrypt(localStorage.getItem('googletoken'))));
   
         const drive = google.drive({ version: "v3",auth:oAuth2Client  });
         const fileMetadata = {

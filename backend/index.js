@@ -7,7 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
-// const googleOAuthRoute = require("./routes/googleAuth/googleAuthRoute");
+const googleOAuthRoute = require("./routes/googleAuth/googleAuthRoute");
 const fbAuth = require('./routes/fbAuth')
 const ZoomOAuthRoute = require("./routes/zoom.routes/Zoom.oauth.route");
 
@@ -22,7 +22,7 @@ app.use(cors());
 
 
 // Google OAuth Routes
-// app.use("/googleOAuth",googleOAuthRoute);
+app.use("/googleOAuth",googleOAuthRoute);
 
 // Zoom OAuth Routes
 app.use("/zoomOAuth", ZoomOAuthRoute);
