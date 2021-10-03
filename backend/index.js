@@ -12,6 +12,12 @@ const fbAuth = require('./routes/fbAuth')
 const ZoomOAuthRoute = require("./routes/zoom.routes/Zoom.oauth.route");
 
 app.use(express.json());
+
+const facebookStrategy = require('passport-facebook').Strategy
+
+
+// Google OAuth Routes
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(require('cookie-parser')());
@@ -28,6 +34,14 @@ app.use("/googleOAuth",googleOAuthRoute);
 app.use("/zoomOAuth", ZoomOAuthRoute);
 
 // Facebook OAuth Routes
+
+// GitHub OAuth Routes
+const gitHubRoute = require("./routes/githubOauth");
+app.use("/github", gitHubRoute);
+
+
+
+
 app.use('/fbOauth', fbAuth);
 
 
