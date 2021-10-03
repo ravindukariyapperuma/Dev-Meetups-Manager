@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,8 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import FBProfileDetails from './FBProfileDetails';
+
 const drawerWidth = 280;
 
 const useStyles = makeStyles((theme) => ({
@@ -24,32 +25,28 @@ const useStyles = makeStyles((theme) => ({
 
 function FBDrawer(props) {
     const classes = useStyles();
-    const { window } = props;
+    const {window} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     const drawer = (
         <div>
             <Toolbar className={classes.rootDiv}>
-                <FBProfileDetails />
+                <FBProfileDetails/>
             </Toolbar>
         </div>
     );
-
     const container = window !== undefined ? () => window().document.body : undefined;
-
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
             <AppBar
                 position="fixed"
                 sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    width: {sm: `calc(100% - ${drawerWidth}px)`},
+                    ml: {sm: `${drawerWidth}px`},
                 }}
             >
                 <Toolbar>
@@ -58,9 +55,9 @@ function FBDrawer(props) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{mr: 2, display: {sm: 'none'}}}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         Dev Meetups Manager
@@ -69,7 +66,7 @@ function FBDrawer(props) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
                 aria-label="mailbox folders"
             >
                 <Drawer
@@ -81,8 +78,8 @@ function FBDrawer(props) {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
                     {drawer}
@@ -90,18 +87,18 @@ function FBDrawer(props) {
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'none', sm: 'block'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                     open
                 >
                     {drawer}
                 </Drawer>
             </Box>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <Toolbar />
+            <Box component="main" sx={{flexGrow: 1, p: 3}}>
+                <Toolbar/>
                 {selectedIndex === 0 ? (
-                    <div></div>// <MettingsApp />
+                    <div></div>
                 ) : (
                     <div></div>
                 )}
