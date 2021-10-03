@@ -29,6 +29,7 @@ Scops:
 1. Go to https://marketplace.zoom.us/ and create an OAuth app to get a client id and client secret.
 2. Create a .env (if it is not existing) file in the backend root file and add client id and client secret.
 3. When creating the app, add the zoom scope that you want to access OAuth APIs
+
 Scops:
 `chat_channel:read` `chat_channel:write` `chat_contact:read` `chat_message:read` `chat_message:write` `meeting:read` `meeting:write` `user:read` `user:write`
 
