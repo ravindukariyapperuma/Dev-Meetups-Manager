@@ -274,7 +274,7 @@ module.exports = {
               authorization: `Bearer ${access_token}`,
             },
             body: {
-              message: "This is auto genarated email from dev mettups manager",
+              message: "This is auto genarated message from dev mettups manager",
               to_channel: meetingID,
             },
             json: true,

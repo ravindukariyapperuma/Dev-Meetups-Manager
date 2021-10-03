@@ -96,7 +96,7 @@ function ZoomAppDrawer(props) {
         }}
       >
         <Button
-          color="inherit"
+          color="primary"
           onClick={() => {
             history.push("/");
           }}
