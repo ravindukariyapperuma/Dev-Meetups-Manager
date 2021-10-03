@@ -5,7 +5,7 @@ import "react-datetime/css/react-datetime.css";
 import moment from 'moment'
 import Googledrawer from "./GoogleDrawer"
 
-export default class Googleevent extends Component {
+export default class GoogleApp extends Component {
 
    
 
