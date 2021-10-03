@@ -17,12 +17,11 @@ import Typography from '@mui/material/Typography';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { makeStyles } from "@material-ui/core/styles";
-
+import Button from "@mui/material/Button";
+import { useHistory } from "react-router-dom";
 
 
 import Profile from "./GoogleProfileDetails"
-import GoogleApp from './GoogleApp'
-import Driveupload from './Driveupload'
 
 const axios = require("axios");
 const drawerWidth = 280;
@@ -38,9 +37,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ZoomAppDrawer(props) {
+function GoogleAppDrawer(props) {
     const classes = useStyles();
   const { window } = props;
+  let history = useHistory();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -61,32 +61,24 @@ function ZoomAppDrawer(props) {
       <Toolbar className={classes.rootDiv}>
           <Profile />
         </Toolbar>
-
-      {/* <List component="nav" aria-label="main mailbox folders">
-      <Divider />
-        <ListItem
-          button
-          selected={selectedIndex === "0"}
-          onClick={(event) => handleListItemClick(event, 0)}
+        <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "5%",
+        }}
+      >
+        <Button
+          color="inherit"
+          onClick={() => {
+            history.push("/");
+          }}
         >
-          <ListItemIcon>
-            < EventNoteIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Event" />
-        </ListItem>
-        <Divider />
-        <ListItem
-          button
-          selected={selectedIndex === "1"}
-          onClick={(event) => handleListItemClick(event, 1)}
-        >
-          <ListItemIcon>
-            <UploadFileIcon  />
-          </ListItemIcon>
-          <ListItemText primary="Drive Upload" />
-        </ListItem>
-        <Divider />
-      </List> */}
+          Logout
+        </Button>
+      </div>
+       
     </div>
   );
 
@@ -161,7 +153,7 @@ function ZoomAppDrawer(props) {
   );
 }
 
-ZoomAppDrawer.propTypes = {
+GoogleAppDrawer.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -169,4 +161,4 @@ ZoomAppDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ZoomAppDrawer;
+export default GoogleAppDrawer;
