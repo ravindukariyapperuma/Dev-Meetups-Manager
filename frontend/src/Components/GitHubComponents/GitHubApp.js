@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css'
 import { Navbar, Nav, Container ,Row, Col,Modal,ListGroup,ListGroupItem,Alert ,Button,Form} from 'react-bootstrap';
-import gitLogo from '../../Asserts/1.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
