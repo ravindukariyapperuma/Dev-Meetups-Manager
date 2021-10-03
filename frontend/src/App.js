@@ -1,16 +1,16 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   BrowserRouter,
   Route,
   Switch,
 } from "react-router-dom";
 
-import GoogleApp from "./components/GoogleComponents/GoogleApp";
-import ZoomApp from "./components/ZoomComponents/ZoomApp";
-import FacebookApp from "./components/FacebookComponents/FacebookApp";
-import GitHubApp from "./components/GitHubComponents/GitHubApp";
-import Home from "./components/CommonComponents/Home";
+import GoogleApp from "./Components/GoogleComponents/GoogleApp";
+import ZoomApp from "./Components/ZoomComponents/ZoomApp";
+import FacebookApp from "./Components/FacebookComponents/FacebookApp";
+import GitHubApp from "./Components/GitHubComponents/GitHubApp";
+import Home from "./Components/CommonComponents/Home";
 
 function App() {
   return (

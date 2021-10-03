@@ -27,12 +27,12 @@ function createData(name, calories, fat, carbs, protein) {
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-export default function DenseTable(props) {
+export default function ChannelTable(props) {
     
 
   const handledelete = async (id) => {
     await axios
-      .delete("http://localhost:5000/zoomOAuth/deletemeeting/" + id)
+      .delete("http://localhost:5000/zoomOAuth/deletchannel/" + id)
       .then((res) => console.log(res.data));
     window.location.reload();
   };
@@ -44,9 +44,7 @@ export default function DenseTable(props) {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Description</TableCell>
-            <TableCell align="left">Start Time</TableCell>
-            <TableCell align="left">Join Url</TableCell>
+            
             <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -60,10 +58,8 @@ export default function DenseTable(props) {
               <TableCell component="th" scope="row">
               {row.id}
               </TableCell>
-              <TableCell align="left">{row.topic}</TableCell>
-              <TableCell align="left">{row.agenda}</TableCell>
-              <TableCell align="left">{row.start_time}</TableCell>
-              <TableCell align="left"><a target="_blank" href={row.join_url}>{row.join_url}</a></TableCell>
+              <TableCell align="left">{row.name}</TableCell>
+           
               <TableCell align="right">
                 {/* <Button variant="outlined" size="small" color="warning"><EditIcon fontSize="small" /></Button> */}
                 <Button variant="outlined" size="small" onClick={() => {handledelete(row.id)}} color="error"><DeleteIcon fontSize="small" /></Button>
