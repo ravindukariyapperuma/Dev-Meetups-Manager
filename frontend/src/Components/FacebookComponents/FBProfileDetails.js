@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import React, {useState, useEffect} from 'react';
+import {styled} from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
+
 const axios = require("axios");
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
+const StyledBadge = styled(Badge)(({theme}) => ({
     '& .MuiBadge-badge': {
         backgroundColor: '#44b700',
         color: '#44b700',
@@ -56,14 +57,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 function GoogleProfileDetails() {
     const classes = useStyles();
     const [user, setUser] = React.useState({});
     useEffect(() => {
         axios.get('http://localhost:5000/fbOAuth/userInfo')
             .then(function (response) {
-                if(response.data.message === "Access token is expired."){
+                if (response.data.message === "Access token is expired.") {
                     console.log("Access token is expired.")
                 } else {
                     setUser(response.data)
@@ -76,14 +76,14 @@ function GoogleProfileDetails() {
     }, []);
 
     return (
-        <div >
-            <Stack direction="row" spacing={0} className={classes.rootDiv} >
+        <div>
+            <Stack direction="row" spacing={0} className={classes.rootDiv}>
                 <StyledBadge
                     overlap="circular"
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                     variant="dot"
                 >
-                    <Avatar alt="Remy Sharp" src={user.picture} sx={{ width: 100, height: 100 }} />
+                    <Avatar alt="Remy Sharp" src={user.picture} sx={{width: 100, height: 100}}/>
                 </StyledBadge>
             </Stack>
             <Typography className={classes.email}>

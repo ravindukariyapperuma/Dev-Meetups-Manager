@@ -120,7 +120,7 @@ function Home() {
                   </a>
                 </Grid>
                 <Grid item className={classes.containerRight} xs={12}>
-                  <a className={classes.link} href="/">
+                <a className={classes.link} href="http://localhost:5000/github/">
                     <img
                       src={githubImg}
                       className={classes.buttons}
