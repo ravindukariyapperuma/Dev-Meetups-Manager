@@ -63,8 +63,8 @@ FB_AUTH_SCOPE="pages_show_list, pages_manage_engagement, pages_manage_posts, pag
 ```
 
 ## To access the github OAuth APIs
-1. Login to the github account and navigate to developer settings in the settings section and create a new app and get client id and client secret.
-2. Create a .env (if it is not existing) file in the backend root file and add client id and secrect id.
+1. Login to the github account and navigate to developer settings in the settings section and create a new app and get the client id and client secret.
+2. Create a .env (if it is not existing) file in the backend root file and add the client id and secrect id.
 
 `.env` file template:
 ```
